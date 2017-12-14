@@ -7,9 +7,9 @@ import org.apache.jena.riot.RDFDataMgr
 import org.apache.lucene.store.FSDirectory
 import java.io.File
 
-fun initDataset(): Dataset {
+fun initDataset(idxDirPath: String): Dataset {
     val entDef = EntityDefinition("entityField", "geoField")
-    val idxFile = File("idx")
+    val idxFile = File(idxDirPath)
     val idxDir = FSDirectory.open(idxFile.toPath())
     val baseDataset = DatasetFactory.create();
     val dataset = SpatialDatasetFactory.createLucene(
@@ -31,8 +31,8 @@ fun loadTtl(dataset: Dataset, ttlPath: String) {
     dataset.end()
 }
 
-fun createDatasetFromTtl(ttlPath: String): Dataset {
-    val dataset = initDataset()
+fun createDatasetFromTtl(ttlPath: String, idxDirPath: String): Dataset {
+    val dataset = initDataset(idxDirPath)
     loadTtl(dataset, ttlPath)
     return dataset
 }

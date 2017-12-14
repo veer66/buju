@@ -1,0 +1,4 @@
+[server]
+port=3012
+idx_dir="idx"
+ttl_path="example/ve.ttl"
